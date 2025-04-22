@@ -90,11 +90,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeGame() {
         playerTurnDisplay.textContent = `C'est à ${playerName} de jouer !`;
+
+        // Réinitialiser les styles des cases
         cells.forEach((cell, index) => {
             cell.textContent = '';
             cell.style.pointerEvents = 'auto';
-            cell.addEventListener('click', () => handlePlayerMove(index));
+            cell.style.backgroundColor = ''; // Supprime le fond rouge
+            cell.style.border = ''; // Supprime la bordure rouge
+            cell.removeEventListener('click', handlePlayerMove); // Supprime les anciens écouteurs
+            cell.addEventListener('click', () => handlePlayerMove(index)); // Ajoute un nouvel écouteur
         });
+
         restartGameButton.classList.add('hidden');
     }
 
@@ -102,7 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!board[index]) {
             board[index] = currentPlayer;
             cells[index].textContent = currentPlayer;
-            if (checkWinner(currentPlayer)) {
+            const winningCombination = checkWinner(currentPlayer);
+            if (winningCombination) {
+                highlightWinningLine(winningCombination); // Affiche la ligne rouge
                 playerTurnDisplay.textContent = `${playerName} a gagné ! 🎉`;
                 endGame();
             } else if (board.every(cell => cell)) {
@@ -125,9 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const move of availableMoves) {
             board[move] = 'O';
             if (checkWinner('O')) {
-                makeMove(move, currentPlayer);
-                playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
-                endGame();
+                makeMove(move, currentPlayer); // Affiche immédiatement le coup
+                setTimeout(() => {
+                    const winningCombination = checkWinner('O');
+                    if (winningCombination) {
+                        highlightWinningLine(winningCombination); // Affiche la ligne rouge
+                    }
+                    playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
+                    endGame();
+                }, 500); // Attendre 500 ms avant d'afficher le message
                 return;
             }
             board[move] = null;
@@ -148,14 +162,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Sinon, jouer aléatoirement
         const randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
-        makeMove(randomMove, currentPlayer);
+        makeMove(randomMove, currentPlayer); // Affiche immédiatement le coup
 
         if (checkWinner(currentPlayer)) {
-            playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
-            endGame();
+            setTimeout(() => {
+                const winningCombination = checkWinner('O');
+                if (winningCombination) {
+                    highlightWinningLine(winningCombination); // Affiche la ligne rouge
+                }
+                playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
+                endGame();
+            }, 500); // Attendre 500 ms avant d'afficher le message
         } else if (board.every(cell => cell)) {
-            playerTurnDisplay.textContent = `Match nul ! 🤝`;
-            endGame();
+            setTimeout(() => {
+                playerTurnDisplay.textContent = `Match nul ! 🤝`;
+                endGame();
+            }, 500); // Attendre 500 ms avant d'afficher le message
         } else {
             currentPlayer = 'X';
             playerTurnDisplay.textContent = `C'est à ${playerName} de jouer !`;
@@ -228,9 +250,24 @@ document.addEventListener('DOMContentLoaded', () => {
             [0, 4, 8],
             [2, 4, 6]
         ];
-        return winningCombinations.some(combination =>
-            combination.every(index => board[index] === player)
-        );
+        for (const combination of winningCombinations) {
+            if (combination.every(index => board[index] === player)) {
+                return combination; // Retourne la combinaison gagnante
+            }
+        }
+        return null; // Pas de gagnant
+    }
+
+    function highlightWinningLine(combination) {
+        combination.forEach(index => {
+            cells[index].style.backgroundColor = 'rgba(255, 0, 0, 0.3)'; // Fond rouge transparent
+            cells[index].style.position = 'relative';
+        });
+
+        // Optionnel : Ajouter une bordure rouge autour des cases
+        combination.forEach(index => {
+            cells[index].style.border = '2px solid red';
+        });
     }
 
     function endGame() {
