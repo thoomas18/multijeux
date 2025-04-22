@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Jeux</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenue 🎮</h1>
+        <div id="game-selection">
+            <h2>Choisissez un jeu :</h2>
+            <button id="morpion-game">Morpion ✖️⭕</button>
+            <button id="shifumi-game">Shifumi ✂️📃🪨</button>
+            <button id="sudoku-game">Sudoku 🔢</button> <!-- Nouveau bouton -->
+        </div>
+    </div>
+    <footer>
+        <p>Crée par Godet Thomas</p>
+    </footer>
+    <script>
+        // Gestion des redirections
+        document.getElementById('morpion-game').addEventListener('click', () => {
+            window.location.href = 'morpion-mode.html'; // Redirige vers le jeu Morpion
+        });
+
+        document.getElementById('shifumi-game').addEventListener('click', () => {
+            window.location.href = 'shifumi.html'; // Redirige vers le jeu Shifumi
+        });
+
+        document.getElementById('sudoku-game').addEventListener('click', () => {
+            window.location.href = 'sudoku-mode.html'; // Redirige vers le jeu Sudoku
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku - Choix du niveau</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="back-button" class="back-button">⬅️ Retour</button>
+        <h1>Sudoku 🔢</h1>
+        <h2>Choisissez un niveau :</h2>
+        <button id="easy-level">Facile</button>
+        <button id="medium-level">Moyen</button>
+        <button id="hard-level">Difficile</button>
+    </div>
+    <footer>
+        <p>Crée par Godet Thomas</p>
+    </footer>
+    <script>
+        // Gestion des redirections
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Retour à la page d'accueil
+        });
+
+        document.getElementById('easy-level').addEventListener('click', () => {
+            window.location.href = 'sudoku.html?level=easy'; // Redirige vers le niveau facile
+        });
+
+        document.getElementById('medium-level').addEventListener('click', () => {
+            window.location.href = 'sudoku.html?level=medium'; // Redirige vers le niveau moyen
+        });
+
+        document.getElementById('hard-level').addEventListener('click', () => {
+            window.location.href = 'sudoku.html?level=hard'; // Redirige vers le niveau difficile
+        });
+    </script>
+</body>
+</html>

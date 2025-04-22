@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="back-button" class="back-button">⬅️ Retour</button>
+        <h1>Sudoku 🔢</h1>
+        <h2 id="timer">Temps : 00:00</h2>
+        <div id="sudoku-board" class="sudoku-board"></div>
+        <div id="end-message" class="hidden">
+            <h1 id="end-text"></h1>
+            <button id="restart-button">Rejouer</button>
+        </div>
+        <button id="validate-button">Valider</button>
+    </div>
+    <footer>
+        <p>Crée par Godet Thomas</p>
+    </footer>
+    <script src="scripts/sudoku.js"></script>
+</body>
+</html>

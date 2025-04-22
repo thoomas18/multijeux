@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion - Choix du mode</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="back-button" class="back-button">⬅️ Retour</button>
+        <h1>Morpion ✖️⭕</h1>
+        <h2>Choisissez un mode de jeu :</h2>
+        <button id="one-player">1 Joueur (contre l'ordinateur)</button>
+        <button id="two-players">2 Joueurs</button>
+    </div>
+    <footer>
+        <p>Crée par Godet Thomas</p>
+    </footer>
+    <script>
+        // Gestion du bouton Retour
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Retour à la page d'accueil
+        });
+    </script>
+    <script src="scripts/morpion-mode.js"></script>
+</body>
+</html>

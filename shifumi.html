@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/shifumi.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <title>Shifumi - Jan ken pon 🍣</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Bouton Retour -->
+    <button id="back-button" class="back-button">⬅️ Retour</button>
+
+    <div id="welcome-screen">
+        <h1>Bienvenue sur Jan ken pon 🍣</h1>
+        <p>Entrez votre nom pour commencer à jouer :</p>
+        <form id="playerForm">
+            <input type="text" id="playerName" name="playerName" placeholder="Votre nom" required>
+            <button type="submit">Commencer 🎮</button>
+        </form>
+    </div>
+
+    <div id="game-screen" style="display: none;">
+        <h1>Jan ken pon 🍣</h1>
+        <p>Choisissez votre coup :</p>
+        <div class="button-container"></div>
+        <div class="results">
+            <p id="choices"></p>
+            <p id="result"></p>
+            <p id="score"></p>
+        </div>
+        <div class="chart-container">
+            <canvas id="scoreChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        <p>🎉 Amusez-vous bien avec Jan ken pon ! 🎮</p>
+        <p>Crée par <strong>Godet Thomas</strong></p>
+    </footer>
+
+    <script>
+        // Gestion du bouton Retour
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Redirige vers la page d'accueil
+        });
+    </script>
+    <script src="scripts/shifumi.js"></script>
+</body>
+</html>
