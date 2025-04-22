@@ -117,8 +117,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleComputerMove() {
-        const bestMove = findBestMoveAI();
-        makeMove(bestMove, currentPlayer);
+        const availableMoves = board
+            .map((cell, index) => (cell === null ? index : null))
+            .filter(index => index !== null);
+
+        // Vérifier si l'IA peut gagner
+        for (const move of availableMoves) {
+            board[move] = 'O';
+            if (checkWinner('O')) {
+                makeMove(move, currentPlayer);
+                playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
+                endGame();
+                return;
+            }
+            board[move] = null;
+        }
+
+        // Vérifier si le joueur peut gagner et bloquer
+        for (const move of availableMoves) {
+            board[move] = 'X';
+            if (checkWinner('X')) {
+                board[move] = null;
+                makeMove(move, currentPlayer);
+                currentPlayer = 'X';
+                playerTurnDisplay.textContent = `C'est à ${playerName} de jouer !`;
+                return;
+            }
+            board[move] = null;
+        }
+
+        // Sinon, jouer aléatoirement
+        const randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        makeMove(randomMove, currentPlayer);
 
         if (checkWinner(currentPlayer)) {
             playerTurnDisplay.textContent = `L'ordinateur a gagné ! 😢`;
